@@ -7,4 +7,3 @@ var Hello = React.createClass({
 });
 
 export default Hello;
-
