@@ -3,10 +3,13 @@ from raven.contrib.flask import Sentry
 from delorean import DeLorean, NotWellFormedException
 from hack_hash import hack_hash
 import simple_encoding
+import os
 
 app = Flask(__name__)
 sentry = Sentry(app)
 
+if 'SECRET_KEY' in os.environ:
+    app.SECRET_KEY = os.environ['SECRET_KEY']
 
 with open('script.txt', 'r') as f:
     app.delorean = DeLorean(f.read())
