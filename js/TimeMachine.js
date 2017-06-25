@@ -4,7 +4,10 @@ import axios from 'axios'
 class TimeMachine extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {challenge: ''}
+    this.send = this.send.bind(this)
+    this.onKeyDown = this.onKeyDown.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.state = {challenge: '', codeword: ''}
     this.loadChallenge()
   }
 
@@ -20,6 +23,25 @@ class TimeMachine extends React.Component {
       .catch((error) => {
         console.log(error)
       })
+  }
+
+  send () {
+    this.props.send(this.state.codeword)
+
+    // feedback to user that case doesn't matter
+    this.setState({codeword: this.state.codeword.toLowerCase()})
+  }
+
+  onKeyDown (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      this.send()
+      return false
+    }
+  }
+
+  onChange (e) {
+    this.setState({codeword: e.target.value})
   }
 
   render () {
@@ -40,9 +62,12 @@ class TimeMachine extends React.Component {
           to do some clever stuff to get info through to the other side...
         </p>
 
-        <textarea id='codeword' />
+        <textarea
+          onKeyDown={this.onKeyDown}
+          onChange={this.onChange}
+          value={this.state.codeword} />
 
-        <a id='send-button' className='button' onClick={this.props.send}>
+        <a id='send-button' className='button' onClick={this.send}>
           Send message
         </a>
 

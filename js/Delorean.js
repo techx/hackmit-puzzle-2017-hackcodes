@@ -63,9 +63,8 @@ class Delorean extends React.Component {
     })
   }
 
-  send () {
+  send (codeword) {
     const username = window.location.href.split('/').pop()
-    const codeword = document.getElementById('codeword').value
     const data = new FormData()
     data.append('username', username)
     data.append('codeword', codeword)
