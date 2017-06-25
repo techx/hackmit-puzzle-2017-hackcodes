@@ -1,4 +1,5 @@
 import React from 'react'
+import Notepad from './Notepad'
 
 class PresentPane extends React.Component {
   getCurrentDate () {
@@ -15,6 +16,8 @@ class PresentPane extends React.Component {
     return (
       <div className='present'>
         <h1> { this.getCurrentDate() } </h1>
+
+        <Notepad />
       </div>
     )
   }

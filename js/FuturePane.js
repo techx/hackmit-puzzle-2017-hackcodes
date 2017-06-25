@@ -1,4 +1,5 @@
 import React from 'react'
+import Notepad from './Notepad'
 
 class FuturePane extends React.Component {
   getHackmitDate () {
@@ -9,6 +10,8 @@ class FuturePane extends React.Component {
     return (
       <div className='future'>
         <h1> { this.getHackmitDate() } </h1>
+
+        <Notepad />
       </div>
     )
   }
