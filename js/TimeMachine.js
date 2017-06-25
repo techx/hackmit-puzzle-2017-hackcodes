@@ -1,8 +1,34 @@
 import React from 'react'
+import axios from 'axios'
+import FormData from 'form-data'
 
 class TimeMachine extends React.Component {
+  constructor () {
+    super()
+    this.send = this.send.bind(this)
+  }
+
   getTargetMessage () {
     return 'send me across'
+  }
+
+  send () {
+    const codeword = document.getElementById('codeword').value
+    const data = new FormData()
+    data.append('codeword', codeword)
+    axios
+      .post('/api/decode', data)
+      .then(this.handleSendResponse)
+      .catch((error) => { console.log(error) })
+  }
+
+  handleSendResponse (response) {
+    const data = response.data
+    console.log(data.message)
+  }
+
+  clear () {
+    console.log('clear')
   }
 
   render () {
@@ -25,9 +51,13 @@ class TimeMachine extends React.Component {
 
         <textarea id='codeword' />
 
-        <a id='send-button' className='button'> Send message </a>
+        <a id='send-button' className='button' onClick={this.send}>
+          Send message
+        </a>
 
-        <a id='clear-button' className='button'> Clear logs </a>
+        <a id='clear-button' className='button' onClick={this.clear}>
+          Clear logs
+        </a>
       </div>
     )
   }
