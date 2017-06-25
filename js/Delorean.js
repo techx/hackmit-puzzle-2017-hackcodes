@@ -44,7 +44,7 @@ class Delorean extends React.Component {
   reverseIndex (array) {
     return array.map((value, i) => {
       return {value: value, index: array.length - (i + 1)}
-    }) 
+    })
   }
 
   getCodewords () {

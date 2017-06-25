@@ -30,7 +30,7 @@ class FuturePane extends React.Component {
 
         <Notepad
           title='Sent codewords'
-          skipAnimation={true}
+          skipAnimation
           content={this.props.notepadContent}
           activeLogEntry={this.props.activeLogEntry}
           hover={this.props.hover} />

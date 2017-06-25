@@ -1,7 +1,8 @@
 import React from 'react'
 
-const NUM_LETTERS = 2
+const NUM_LETTERS = 3
 const TOTAL_DELAY = 1300
+const MAX_DELAY = 100
 
 class LogEntry extends React.Component {
   constructor (props) {
@@ -17,7 +18,7 @@ class LogEntry extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.skipAnimation) {
       this.setState({content: this.props.content})
     } else {
@@ -25,11 +26,11 @@ class LogEntry extends React.Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearTimeout(this.state.timer)
   }
 
-  getRandomChar() {
+  getRandomChar () {
     const alphabet = 'abcdefghijklmnopqrstuvwxyz' +
       'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
       '0123456789'
@@ -46,7 +47,10 @@ class LogEntry extends React.Component {
       const transition = count === NUM_LETTERS
       const nextChar = transition ? '' : this.getRandomChar()
       const delay = TOTAL_DELAY / (fullContent.length * (NUM_LETTERS + 1))
-      const timer = setTimeout(this.animateText.bind(this), delay)
+      const timer = setTimeout(
+        this.animateText.bind(this),
+        Math.min(MAX_DELAY, delay)
+      )
       this.setState({
         timer: timer,
         count: transition ? 0 : count + 1,
