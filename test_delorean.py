@@ -11,7 +11,7 @@ class DeLoreanTests(unittest.TestCase):
 
     def test_uwobfo(self):
         words = ['hi', 'my', 'name', 'is', 'pat', 'what', 'is', 'your', 'name']
-        result = DeLorean.unique_words_sorted_by_first_occurence(words)
+        result = DeLorean.unique_words_sorted_by_first_occurrence(words)
         expected = ['hi', 'my', 'name', 'is', 'pat', 'what', 'your']
         self.assertEqual(result, expected)
 
