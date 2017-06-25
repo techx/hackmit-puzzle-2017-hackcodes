@@ -7,7 +7,9 @@ class Delorean extends React.Component {
     return (
       <div className="container">
         <FuturePane />
+
         <PresentPane />
+
         <br style={{ clear: 'both' }} />
       </div>
     )

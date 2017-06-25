@@ -1,5 +1,6 @@
 import React from 'react'
 import Notepad from './Notepad'
+import TimeMachine from './TimeMachine'
 
 class FuturePane extends React.Component {
   getHackmitDate () {
@@ -11,7 +12,11 @@ class FuturePane extends React.Component {
       <div className='future'>
         <h1> { this.getHackmitDate() } </h1>
 
-        <Notepad />
+        <TimeMachine />
+
+        <Notepad title='Sent codewords' />
+
+        <br style={{ clear: 'both' }} />
       </div>
     )
   }

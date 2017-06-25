@@ -17,7 +17,7 @@ class PresentPane extends React.Component {
       <div className='present'>
         <h1> { this.getCurrentDate() } </h1>
 
-        <Notepad />
+        <Notepad title='Received messages' />
       </div>
     )
   }
