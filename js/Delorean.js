@@ -7,6 +7,7 @@ import PresentPane from './PresentPane'
 class Delorean extends React.Component {
   constructor (props) {
     super(props)
+    this.hover = this.hover.bind(this)
     this.send = this.send.bind(this)
     this.clear = this.clear.bind(this)
 
@@ -14,7 +15,11 @@ class Delorean extends React.Component {
     const messages = this.retrieve('deloreanCodesMessages') || []
     if (codewords === null) this.store('deloreanCodesCodewords', [])
     if (messages === null) this.store('deloreanCodesMessages', [])
-    this.state = {codewords: codewords, messages: messages}
+    this.state = {
+      codewords: codewords,
+      messages: messages,
+      activeLogEntry: null
+    }
   }
 
   store (key, value) {
@@ -38,18 +43,24 @@ class Delorean extends React.Component {
 
   getCodewords () {
     return this.state.codewords.concat([
-      'codeword 1',
+      'codeword 3',
       'codeword 2',
-      'codeword 3'
-    ]).join('\n\n')
+      'codeword 1'
+    ])
   }
 
   getMessages () {
     return this.state.messages.concat([
-      'message 1',
+      'message 3',
       'message 2',
-      'message 3'
-    ]).join('\n\n')
+      'message 1'
+    ])
+  }
+
+  hover (isBeginHover, entryId) {
+    this.setState({
+      activeLogEntry: isBeginHover ? entryId : null
+    })
   }
 
   send () {
@@ -87,20 +98,24 @@ class Delorean extends React.Component {
     this.store('deloreanCodesCodewords', [])
     this.store('deloreanCodesMessages', [])
   }
-  
+
   render () {
     return (
       <div className='container'>
         <FuturePane
           currentDate={this.getCurrentDate()}
           notepadContent={this.getCodewords()}
+          activeLogEntry={this.state.activeLogEntry}
+          hover={this.hover}
           send={this.send}
           clear={this.clear}
           />
 
         <PresentPane
           currentDate={this.getCurrentDate()}
-          notepadContent={this.getMessages()} />
+          notepadContent={this.getMessages()}
+          activeLogEntry={this.state.activeLogEntry}
+          hover={this.hover} />
 
         <br style={{clear: 'both'}} />
       </div>

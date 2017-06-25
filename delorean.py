@@ -12,10 +12,11 @@ class DeLorean:
         self.n = n
 
         words = DeLorean.words_from_corpus(corpus)
-        sorted_words = DeLorean.unique_words_sorted_by_first_occurence(words)
+        sorted_words = DeLorean.unique_words_sorted_by_first_occurrence(words)
         self.buckets = self.truncate_extra_words(sorted_words)
-        self.bucket_idxs = {self.buckets[i]
-            : i for i in range(len(self.buckets))}
+        self.bucket_idxs = {
+            self.buckets[i]: i for i in range(len(self.buckets))
+        }
         self.word_set = set(self.buckets)
 
         self.n_words = len(self.buckets) // self.bucket_size
@@ -32,10 +33,12 @@ class DeLorean:
             if len(word) > 0:
                 output.append(word)
         # return output
-        return list(filter(lambda w: len(w) > 0, map(lambda w: w.strip(), corpus)))
+        return list(filter(
+            lambda w: len(w) > 0, map(lambda w: w.strip(), corpus)
+        ))
 
     @staticmethod
-    def unique_words_sorted_by_first_occurence(words):
+    def unique_words_sorted_by_first_occurrence(words):
         done = set([])
         o = []
         for word in words:
@@ -57,7 +60,9 @@ class DeLorean:
         out = []
         for i in range(len(message_bitstring) // self.n):
             out.append(self.encode_N_bs(
-                message_bitstring[i * self.n:(i + 1) * self.n], current_bucket))
+                message_bitstring[i * self.n:(i + 1) * self.n],
+                current_bucket
+            ))
             current_bucket += 1
         return out
 
@@ -94,3 +99,17 @@ class DeLorean:
     def decode(self, word_list):
         self.sort_words_inplace(word_list)
         return self.decode_sorted(word_list)
+
+    @staticmethod
+    def byte_to_bitstr(b):
+        partial = '{0:b}'.format(b)
+        return ('0' * (8 - len(partial))) + partial
+
+    @staticmethod
+    def str_to_bitstr(s):
+        return ''.join(DeLorean.byte_to_bitstr(ord(c)) for c in s)
+
+    @staticmethod
+    def bitstr_to_str(s):
+        chunks = [s[i:i+8] for i in range(0, len(s), 8)]
+        return ''.join(chr(int(chunk, 2)) for chunk in chunks)

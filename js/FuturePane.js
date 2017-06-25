@@ -30,7 +30,9 @@ class FuturePane extends React.Component {
 
         <Notepad
           title='Sent codewords'
-          content={this.props.notepadContent} />
+          content={this.props.notepadContent}
+          activeLogEntry={this.props.activeLogEntry}
+          hover={this.props.hover} />
 
         <br style={{clear: 'both'}} />
       </div>

@@ -9,7 +9,9 @@ class PresentPane extends React.Component {
 
         <Notepad
           title='Received messages'
-          content={this.props.notepadContent} />
+          content={this.props.notepadContent}
+          activeLogEntry={this.props.activeLogEntry}
+          hover={this.props.hover} />
       </div>
     )
   }

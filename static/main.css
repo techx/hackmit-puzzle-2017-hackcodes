@@ -76,12 +76,15 @@ body {
 .notepad {
   min-height: 200px;
   padding: 0.5rem;
+  padding-bottom: 1rem;
   border-radius: 1px;
   box-shadow: 2px 2px 5px #252c37;
   line-height: 20px;
   padding-left: 40px;
   font-family: 'Karla', sans-serif;
   position: relative;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .notepad::before {
@@ -93,6 +96,10 @@ body {
   bottom: 0;
   border: 1px solid;
   border-color: transparent #ff585d;
+}
+
+.notepad-heading {
+  text-decoration: underline;
 }
 
 .future .notepad {
@@ -209,4 +216,14 @@ pre {
   .mobile {
     display: block;
   }
+}
+
+.log-entry {
+  cursor: pointer;
+}
+
+.active.log-entry {
+  background: rgba(255, 88, 93, 0.4);
+  padding: -0.25rem;
+  line-height: 20px;
 }
