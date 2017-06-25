@@ -7,10 +7,10 @@ class TimeMachine extends React.Component {
     super(props)
     this.state = {challenge: ''}
     this.send = this.send.bind(this)
-    this.getChallengeMessage()
+    this.loadChallenge()
   }
 
-  getChallengeMessage () {
+  loadChallenge () {
     const username = window.location.href.split('/').pop()
     axios
       .get('/api/challenge', {

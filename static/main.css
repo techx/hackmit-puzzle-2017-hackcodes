@@ -176,10 +176,15 @@ p {
 pre {
   color: white;
   margin-bottom: 1rem;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 
 @media (max-width: 850px) {
+  .container {
+    padding: 1rem 1rem;
+  }
+
   .future, .present, .future .notepad, .time-machine {
     float: none;
     width: 100%;
