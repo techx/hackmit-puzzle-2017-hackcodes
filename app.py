@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, abort, jsonify, Response
+from raven.contrib.flask import Sentry
 from delorean import DeLorean, NotWellFormedException
 from hack_hash import hack_hash
 import simple_encoding
-import string
 
 app = Flask(__name__)
+sentry = Sentry(app)
+
+
 with open('script.txt', 'r') as f:
     app.delorean = DeLorean(f.read())
 
