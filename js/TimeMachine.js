@@ -20,9 +20,6 @@ class TimeMachine extends React.Component {
       .then((response) => {
         this.setState({challenge: response.data.message})
       })
-      .catch((error) => {
-        console.log(error)
-      })
   }
 
   send () {

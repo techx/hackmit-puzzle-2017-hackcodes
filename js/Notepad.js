@@ -8,13 +8,14 @@ class Notepad extends React.Component {
         <span className='notepad-heading'> {this.props.title} </span>
         <br />
         <br />
-        {this.props.content.map((item, key) => {
+        {this.props.content.map((item) => {
           return <LogEntry
-            isActive={this.props.activeLogEntry === key}
+            skipAnimation={this.props.skipAnimation}
+            isActive={this.props.activeLogEntry === item.index}
             hover={this.props.hover}
-            key={key}
-            entryId={key}
-            content={item} />
+            key={item.index}
+            entryId={item.index}
+            content={item.value} />
         })}
       </div>
     )
