@@ -18,7 +18,7 @@ class FuturePane extends React.Component {
           { this.getHackmitDate() } { this.getTitle() }
         </h1>
         <h1 className='mobile'>
-          { this.getHackmitDate() } 
+          { this.getHackmitDate() }
           <br />
           { this.getTitle() }
         </h1>

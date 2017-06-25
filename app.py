@@ -18,7 +18,11 @@ def page(username):
 
 
 def get_answer(username):
-    return hack_hash(username + app.SECRET_KEY, ['0', '1'], app.delorean.max_bits)
+    return hack_hash(
+        username + app.SECRET_KEY,
+        ['0', '1'],
+        app.delorean.max_bits
+    )
 
 
 @app.route('/api/challenge')
@@ -49,7 +53,8 @@ def decode():
     except NotWellFormedException:
         pass
 
-    #the_message_they_shouldve_sent = app.delorean.encode_without_permutation(get_answer(username))
+    # the_message_they_shouldve_sent =
+    # app.delorean.encode_without_permutation(get_answer(username))
 
     if message == get_answer(username):
         answer = 'YOU DID IT'

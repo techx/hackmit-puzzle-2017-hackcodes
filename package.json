@@ -18,6 +18,8 @@
     "webpack": "^1.12.12"
   },
   "dependencies": {
+    "axios": "^0.16.2",
+    "form-data": "^2.2.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
   }
