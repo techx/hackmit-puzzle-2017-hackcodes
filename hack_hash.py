@@ -19,7 +19,7 @@ def hack_hash(message, charset, length):
     digests = []
     i = 0
     bits_for_charset = int(math.ceil(math.log2(len(charset))))
-    bytes_for_charset = int(math.ceil(bits_for_charset/8))
+    bytes_for_charset = int(math.ceil(bits_for_charset / 8))
     while len(digests) * 64 < length * bytes_for_charset:
         digests.append(hashlib.sha512(
             bytes(str(i) + message, 'utf-8')).digest())
@@ -27,7 +27,7 @@ def hack_hash(message, charset, length):
     digest = bytes(b'').join(digests)
     out = []
     for i in range(length):
-        b = digest[i*bytes_for_charset:(i+1)*bytes_for_charset]
+        b = digest[i * bytes_for_charset:(i + 1) * bytes_for_charset]
         n = int.from_bytes(b, byteorder='little', signed=False)
         out.append(charset[n % len(charset)])
     return ''.join(out)
