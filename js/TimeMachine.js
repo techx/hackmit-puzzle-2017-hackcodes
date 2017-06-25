@@ -13,8 +13,10 @@ class TimeMachine extends React.Component {
   }
 
   send () {
+    const username = window.location.href.split('/').pop()
     const codeword = document.getElementById('codeword').value
     const data = new FormData()
+    data.append('username', username)
     data.append('codeword', codeword)
     axios
       .post('/api/decode', data)
@@ -24,7 +26,7 @@ class TimeMachine extends React.Component {
 
   handleSendResponse (response) {
     const data = response.data
-    console.log(data.message)
+    console.log(data)
   }
 
   clear () {

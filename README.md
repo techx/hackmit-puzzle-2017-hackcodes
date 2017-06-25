@@ -1,6 +1,8 @@
 HackCodes 2017
 ==
 
+[![Build Status](https://travis-ci.com/techx/hackmit-puzzle-2017-hackcodes.svg?token=qtHz376FXw1xGgVxnyHz&branch=master)](https://travis-ci.com/techx/hackmit-puzzle-2017-hackcodes)
+
 Puzzle for HackMIT 2017.
 
 ## Prerequisites
