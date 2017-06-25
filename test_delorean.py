@@ -2,6 +2,7 @@ from delorean import DeLorean
 import unittest
 import random
 
+
 class DeLoreanTests(unittest.TestCase):
     def test_wfc(self):
         corpus = 'hi my name is pat what is your name'
@@ -63,6 +64,7 @@ class DeLoreanTests(unittest.TestCase):
             while len(inp) % d.n != 0:
                 inp += '0'
             self.assertEqual(decoded, inp)
+
 
 if __name__ == '__main__':
     unittest.main()
