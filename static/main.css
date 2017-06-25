@@ -17,6 +17,10 @@
   display: none;
 }
 
+.display-linebreak {
+  white-space: pre-line;
+}
+
 body {
   background: #252c37;
 }
@@ -72,12 +76,15 @@ body {
 .notepad {
   min-height: 200px;
   padding: 0.5rem;
+  padding-bottom: 1rem;
   border-radius: 1px;
   box-shadow: 2px 2px 5px #252c37;
   line-height: 20px;
   padding-left: 40px;
   font-family: 'Karla', sans-serif;
   position: relative;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .notepad::before {
@@ -89,6 +96,10 @@ body {
   bottom: 0;
   border: 1px solid;
   border-color: transparent #ff585d;
+}
+
+.notepad-heading {
+  text-decoration: underline;
 }
 
 .future .notepad {
@@ -130,7 +141,7 @@ body {
 
 .time-machine textarea {
   width: 100%;
-  min-height: 200px;
+  min-height: 92px;
   font-family: 'Karla', sans-serif;
   font-size: 16px;
   padding: 0.5rem;
@@ -176,9 +187,15 @@ p {
 pre {
   color: white;
   margin-bottom: 1rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 @media (max-width: 850px) {
+  .container {
+    padding: 1rem 1rem;
+  }
+
   .future, .present, .future .notepad, .time-machine {
     float: none;
     width: 100%;
@@ -199,4 +216,14 @@ pre {
   .mobile {
     display: block;
   }
+}
+
+.log-entry {
+  cursor: pointer;
+}
+
+.active.log-entry {
+  background: rgba(255, 88, 93, 0.4);
+  padding: -0.25rem;
+  line-height: 20px;
 }
