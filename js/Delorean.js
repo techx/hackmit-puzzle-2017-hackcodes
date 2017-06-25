@@ -20,7 +20,7 @@ class Delorean extends React.Component {
 
         <PresentPane currentDate={this.getCurrentDate()} />
 
-        <br style={{ clear: 'both' }} />
+        <br style={{clear: 'both'}} />
       </div>
     )
   }

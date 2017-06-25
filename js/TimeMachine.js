@@ -3,13 +3,25 @@ import axios from 'axios'
 import FormData from 'form-data'
 
 class TimeMachine extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+    this.state = {challenge: ''}
     this.send = this.send.bind(this)
+    this.getChallengeMessage()
   }
 
-  getTargetMessage () {
-    return 'send me across'
+  getChallengeMessage () {
+    const username = window.location.href.split('/').pop()
+    axios
+      .get('/api/challenge', {
+        params: {username: username}
+      })
+      .then((response) => {
+        this.setState({challenge: response.data.message})
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   send () {
@@ -21,7 +33,9 @@ class TimeMachine extends React.Component {
     axios
       .post('/api/decode', data)
       .then(this.handleSendResponse)
-      .catch((error) => { console.log(error) })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   handleSendResponse (response) {
@@ -40,10 +54,10 @@ class TimeMachine extends React.Component {
           You've just had the best idea of your life, but it's the month
           after HackMIT. Desperate, you've broken into the MIT time
           machine lab! You need to figure out how to transmit the
-          following message back to { this.props.currentDate }:
+          following message back to {this.props.currentDate}:
         </p>
 
-        <pre> { this.getTargetMessage() } </pre>
+        <pre>{this.state.challenge}</pre>
 
         <p>
           There's one problem: time machines shuffle up data really

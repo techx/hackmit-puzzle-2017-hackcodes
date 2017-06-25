@@ -15,19 +15,19 @@ class FuturePane extends React.Component {
     return (
       <div className='future'>
         <h1 className='normal'>
-          { this.getHackmitDate() } { this.getTitle() }
+          {this.getHackmitDate()} {this.getTitle()}
         </h1>
         <h1 className='mobile'>
-          { this.getHackmitDate() }
+          {this.getHackmitDate()}
           <br />
-          { this.getTitle() }
+          {this.getTitle()}
         </h1>
 
         <TimeMachine currentDate={this.props.currentDate} />
 
         <Notepad title='Sent codewords' />
 
-        <br style={{ clear: 'both' }} />
+        <br style={{clear: 'both'}} />
       </div>
     )
   }

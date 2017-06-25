@@ -176,6 +176,7 @@ p {
 pre {
   color: white;
   margin-bottom: 1rem;
+  word-wrap: break-word;
 }
 
 @media (max-width: 850px) {
