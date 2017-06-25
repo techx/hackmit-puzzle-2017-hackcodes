@@ -1,11 +1,12 @@
-var webpack = require('webpack');  
-module.exports = {  
+var path = require('path')
+
+module.exports = {
   entry: [
-    "./js/app.js"
+    './js/app.js'
   ],
   output: {
-    path: __dirname + '/static',
-    filename: "bundle.js"
+    path: path.join(__dirname, '/static'),
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
@@ -21,4 +22,4 @@ module.exports = {
   },
   plugins: [
   ]
-};
+}
