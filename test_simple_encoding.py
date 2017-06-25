@@ -5,10 +5,10 @@ import simple_encoding
 class TestSimpleEncoding(unittest.TestCase):
     def test_char_to_bits(self):
         b = simple_encoding.encode('a')
-        self.assertEqual(b, '00000000')
+        self.assertEqual(b, '00000')
 
         b = simple_encoding.encode('b')
-        self.assertEqual(b, '00000001')
+        self.assertEqual(b, '00001')
 
     def test_end_to_end(self):
         inp = 'hi my name is pat what is your name'

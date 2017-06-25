@@ -34,17 +34,17 @@ class AppTest(unittest.TestCase):
         r = self.decode('back')
         self.assertEqual(r, {
             'answer': None,
-            'message': None,
-            'message_bits': '0000',
+            'message': 'a',
+            'message_bits': '00000',
             'well_formed': True
         })
 
     def test_decode_valid(self):
-        r = self.decode('back dienstfrey')
+        r = self.decode('back on')
         self.assertEqual(r, {
             'answer': None,
-            'message': 'a',
-            'message_bits': '00000000',
+            'message': 'aa',
+            'message_bits': '0000000000',
             'well_formed': True
         })
 

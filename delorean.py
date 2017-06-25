@@ -7,7 +7,7 @@ class NotWellFormedException(Exception):
 
 class DeLorean:
     # n = log2(bucket_size)
-    def __init__(self, corpus, bucket_size=16, n=4):
+    def __init__(self, corpus, bucket_size=32, n=5):
         self.bucket_size = bucket_size
         self.n = n
 

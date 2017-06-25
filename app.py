@@ -29,10 +29,11 @@ def page(username):
 
 
 def get_answer_str(username):
+    # 5 is the max length of one of these strings
     return hack_hash(
         username + app.SECRET_KEY,
         ['whats', 'up', 'my', 'name', 'is', 'pat'],
-        (app.delorean.max_bits // 8)
+        (app.delorean.max_bits // (5 * simple_encoding.BITS))
     )
 
 

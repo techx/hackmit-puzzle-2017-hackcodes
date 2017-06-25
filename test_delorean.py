@@ -33,13 +33,21 @@ class DeLoreanTests(unittest.TestCase):
         self.assertEqual(d.encode_N_bs('1', 1), 'is')
 
     def test_encode_without_permutation(self):
-        # TODO test for padding??
         corpus = 'hi my name is pat what is your name'
         d = DeLorean(corpus, bucket_size=2, n=1)
 
         self.assertEqual(d.encode_without_permutation('00'), ['hi', 'name'])
         self.assertEqual(d.encode_without_permutation('10'), ['my', 'name'])
         self.assertEqual(d.encode_without_permutation('11'), ['my', 'is'])
+
+    def test_encode_without_permutation_padding(self):
+        corpus = 'hi my name is pat what is your name please tell me'
+        d = DeLorean(corpus, bucket_size=4, n=2)
+
+        self.assertEqual(d.encode_without_permutation('0'), ['hi'])
+        self.assertEqual(d.encode_without_permutation('1'), ['name'])
+        self.assertEqual(d.encode_without_permutation('000'), ['hi', 'pat'])
+        self.assertEqual(d.encode_without_permutation('001'), ['hi', 'your'])
 
     def test_decode_sorted(self):
         encoded = ['hi', 'is']

@@ -1,7 +1,7 @@
 import string
 
 SIMPLE_ENCODING = string.ascii_lowercase + ' '
-BITS = 8
+BITS = 5
 
 
 def char_to_bits(c):
