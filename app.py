@@ -14,6 +14,17 @@ if 'SECRET_KEY' in os.environ:
 with open('script.txt', 'r') as f:
     app.delorean = DeLorean(f.read())
 
+with open('projects.txt', 'r') as f:
+    projects_unfiltered = f.read().strip().split('\n')
+    PROJECTS = []
+    length = app.delorean.max_bits // simple_encoding.BITS
+    for project in projects_unfiltered:
+        if len(project) >= length:
+            PROJECTS.append(project[:length].strip())
+    if len(PROJECTS) == 0:
+        print("NOT ENOUGH PROJECTS")
+        sys.exit(1)
+    print("loaded %i projects" % len(PROJECTS))
 
 @app.route('/')
 def index():
@@ -32,8 +43,8 @@ def get_answer_str(username):
     # 5 is the max length of one of these strings
     return hack_hash(
         username + app.SECRET_KEY,
-        ['whats', 'up', 'my', 'name', 'is', 'pat'],
-        (app.delorean.max_bits // (5 * simple_encoding.BITS))
+        PROJECTS,
+        1
     )
 
 
