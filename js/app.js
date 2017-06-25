@@ -1,5 +1,8 @@
-import Hello from './Hello';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Delorean from './Delorean'
 
-ReactDOM.render(<Hello/>, document.getElementById('reactEntry'));
+ReactDOM.render(
+  <Delorean />,
+  document.getElementById('root')
+)
