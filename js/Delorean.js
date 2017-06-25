@@ -5,7 +5,7 @@ import PresentPane from './PresentPane'
 class Delorean extends React.Component {
   render () {
     return (
-      <div className="container">
+      <div className='container'>
         <FuturePane />
 
         <PresentPane />
