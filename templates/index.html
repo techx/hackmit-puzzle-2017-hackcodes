@@ -11,6 +11,11 @@
 <body>
   <div id="root"></div>
 
+  <script src="https://cdn.ravenjs.com/3.16.0/raven.min.js"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
+  Raven.config('https://542b3ed1a624425dba88a11a139ebe61@sentry.io/181971').install()
+  </script>
   <!-- Attach React components -->
   <script type="text/javascript" src="{{ url_for('static', filename='bundle.js') }}"></script>
 </body>
