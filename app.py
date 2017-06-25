@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, abort, jsonify
+from flask import Flask, render_template, request, abort, jsonify, Response
 from delorean import DeLorean, NotWellFormedException
 from hack_hash import hack_hash
 
@@ -14,7 +14,10 @@ def index():
 
 @app.route('/u/<username>')
 def page(username):
-    return render_template('index.html')
+    resp = Response(render_template('index.html'))
+    resp.headers['X-Script'] = '/static/script.txt'
+    resp.headers['X-Tokenization-Strategy'] = 'lower,newlines->spaces,drop-non-lettersspaces'
+    return resp
 
 
 def get_answer(username):
