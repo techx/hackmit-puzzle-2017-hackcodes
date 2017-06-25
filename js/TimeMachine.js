@@ -19,9 +19,8 @@ class TimeMachine extends React.Component {
 
         <p>
           There's one problem: time machines shuffle up data really
-          <i> really</i> badly, so you'll need to use some kind of error
-          correcting code... If only you could figure out the one this
-          lab uses!
+          <i> really </i> badly, so the researchers at this lab have
+          to do some clever stuff to get info through to the other side...
         </p>
 
         <textarea id='codeword' />

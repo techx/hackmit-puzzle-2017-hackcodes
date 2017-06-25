@@ -9,6 +9,14 @@
   outline-style: none;
 }
 
+.normal {
+  display: block;
+}
+
+.mobile {
+  display: none;
+}
+
 body {
   background: #252c37;
 }
@@ -117,6 +125,7 @@ body {
   float: left;
   width: 47%;
   margin-right: 3%;
+  margin-bottom: 1.5rem;
 }
 
 .time-machine textarea {
@@ -167,4 +176,27 @@ p {
 pre {
   color: white;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 850px) {
+  .future, .present, .future .notepad, .time-machine {
+    float: none;
+    width: 100%;
+  }
+
+  .future, .present {
+    padding: 0;
+  }
+
+  .present h1 {
+    text-align: left;
+  }
+
+  .normal {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
 }

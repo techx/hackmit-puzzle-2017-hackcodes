@@ -14,7 +14,14 @@ class FuturePane extends React.Component {
   render () {
     return (
       <div className='future'>
-        <h1> { this.getHackmitDate() } { this.getTitle() } </h1>
+        <h1 className='normal'>
+          { this.getHackmitDate() } { this.getTitle() }
+        </h1>
+        <h1 className='mobile'>
+          { this.getHackmitDate() } 
+          <br />
+          { this.getTitle() }
+        </h1>
 
         <TimeMachine currentDate={this.props.currentDate} />
 
