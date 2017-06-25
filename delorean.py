@@ -111,5 +111,5 @@ class DeLorean:
 
     @staticmethod
     def bitstr_to_str(s):
-        chunks = [s[i:i+8] for i in range(0, len(s), 8)]
+        chunks = [s[i:i + 8] for i in range(0, len(s), 8)]
         return ''.join(chr(int(chunk, 2)) for chunk in chunks)

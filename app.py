@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, abort, jsonify, Response
 from delorean import DeLorean, NotWellFormedException
 from hack_hash import hack_hash
+import simple_encoding
+import string
 
 app = Flask(__name__)
 with open('script.txt', 'r') as f:
@@ -20,11 +22,11 @@ def page(username):
     return resp
 
 
-def get_answer(username):
+def get_answer_str(username):
     return hack_hash(
         username + app.SECRET_KEY,
-        ['0', '1'],
-        app.delorean.max_bits
+        ['whats', 'up', 'my', 'name', 'is', 'pat'],
+        (app.delorean.max_bits // 8)
     )
 
 
@@ -33,8 +35,10 @@ def challenge():
     if 'username' not in request.args:
         abort(400)
     username = request.args['username']
+    answer_str = get_answer_str(username)
     response = {
-        'message': get_answer(username)
+        'message': answer_str,
+        'message_bits': simple_encoding.encode(answer_str)
     }
     return jsonify(response)
 
@@ -46,25 +50,33 @@ def decode():
     username = request.form['username']
     word_list = request.form['codeword'].split(' ')
 
-    message = None
+    message_bits = None
     well_formed = False
     answer = None
 
     try:
-        message = app.delorean.decode(word_list)
+        message_bits = app.delorean.decode(word_list)
         well_formed = True
     except NotWellFormedException:
         pass
 
     # the_message_they_shouldve_sent =
     # app.delorean.encode_without_permutation(get_answer(username))
+    answer_str = get_answer_str(username)
+    answer_bits = simple_encoding.encode(answer_str)
 
-    if message == get_answer(username):
+    if message_bits == answer_bits:
         answer = 'YOU DID IT'
+
+    try:
+        message_str = simple_encoding.decode(message_bits)
+    except:
+        message_str = None
 
     response = {
         'well_formed': well_formed,
-        'message': message,  # bitstring
+        'message_bits': message_bits,  # bitstring
+        'message': message_str,
         'answer': answer
     }
 

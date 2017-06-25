@@ -1,6 +1,7 @@
 import unittest
 import app
 import json
+import simple_encoding
 
 
 class AppTest(unittest.TestCase):
@@ -11,7 +12,9 @@ class AppTest(unittest.TestCase):
     def test_challenge(self):
         rv = self.app.get('/api/challenge?username=patins')
         j = json.loads(rv.data)
-        self.assertEqual(j['message'], app.get_answer('patins'))
+        answer_str = app.get_answer_str('patins')
+        self.assertEqual(j['message'], answer_str)
+        self.assertEqual(j['message_bits'], simple_encoding.encode(answer_str))
 
     def decode(self, s):
         rv = self.app.post(
@@ -23,23 +26,38 @@ class AppTest(unittest.TestCase):
         self.assertEqual(r, {
             'answer': None,
             'message': None,
+            'message_bits': None,
             'well_formed': False
         })
 
-    def test_decode_valid(self):
+    def test_decode_valid_invalid_encoding(self):
         r = self.decode('back')
         self.assertEqual(r, {
             'answer': None,
-            'message': '0000',
+            'message': None,
+            'message_bits': '0000',
+            'well_formed': True
+        })
+
+    def test_decode_valid(self):
+        r = self.decode('back dienstfrey')
+        self.assertEqual(r, {
+            'answer': None,
+            'message': 'a',
+            'message_bits': '00000000',
             'well_formed': True
         })
 
     def test_decode_answer(self):
+        answer_str = app.get_answer_str('patins')
+        answer_bits = simple_encoding.encode(answer_str)
         answer = app.app.delorean.encode_without_permutation(
-            app.get_answer('patins'))
+            answer_bits)
         r = self.decode(' '.join(answer))
         self.assertIsNotNone(r['answer'])
         self.assertTrue(r['well_formed'])
+        self.assertEqual(r['message'], answer_str)
+        self.assertEqual(r['message_bits'], answer_bits)
 
 
 if __name__ == '__main__':
