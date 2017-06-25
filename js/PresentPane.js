@@ -7,7 +7,9 @@ class PresentPane extends React.Component {
       <div className='present'>
         <h1> {this.props.currentDate} </h1>
 
-        <Notepad title='Received messages' />
+        <Notepad
+          title='Received messages'
+          content={this.props.notepadContent} />
       </div>
     )
   }

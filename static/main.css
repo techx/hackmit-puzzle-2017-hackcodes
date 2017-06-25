@@ -17,6 +17,10 @@
   display: none;
 }
 
+.display-linebreak {
+  white-space: pre-line;
+}
+
 body {
   background: #252c37;
 }
@@ -130,7 +134,7 @@ body {
 
 .time-machine textarea {
   width: 100%;
-  min-height: 200px;
+  min-height: 92px;
   font-family: 'Karla', sans-serif;
   font-size: 16px;
   padding: 0.5rem;

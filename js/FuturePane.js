@@ -23,9 +23,14 @@ class FuturePane extends React.Component {
           {this.getTitle()}
         </h1>
 
-        <TimeMachine currentDate={this.props.currentDate} />
+        <TimeMachine
+          currentDate={this.props.currentDate}
+          send={this.props.send}
+          clear={this.props.clear} />
 
-        <Notepad title='Sent codewords' />
+        <Notepad
+          title='Sent codewords'
+          content={this.props.notepadContent} />
 
         <br style={{clear: 'both'}} />
       </div>
