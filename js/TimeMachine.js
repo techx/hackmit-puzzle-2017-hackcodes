@@ -2,7 +2,7 @@ import React from 'react'
 
 class TimeMachine extends React.Component {
   getDescription () {
-
+    return '';
   }
 
   render () {

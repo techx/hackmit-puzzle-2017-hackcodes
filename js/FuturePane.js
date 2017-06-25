@@ -7,10 +7,14 @@ class FuturePane extends React.Component {
     return 'Sep 2017'
   }
 
+  getTitle() {
+    return '~/the-delorean-codes'
+  }
+
   render () {
     return (
       <div className='future'>
-        <h1> { this.getHackmitDate() } </h1>
+        <h1> { this.getHackmitDate() } { this.getTitle() } </h1>
 
         <TimeMachine />
 
