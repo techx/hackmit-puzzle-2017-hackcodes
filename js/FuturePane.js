@@ -4,10 +4,10 @@ import TimeMachine from './TimeMachine'
 
 class FuturePane extends React.Component {
   getHackmitDate () {
-    return 'Sep 2017'
+    return 'Oct 2017'
   }
 
-  getTitle() {
+  getTitle () {
     return '~/the-delorean-codes'
   }
 
@@ -16,7 +16,7 @@ class FuturePane extends React.Component {
       <div className='future'>
         <h1> { this.getHackmitDate() } { this.getTitle() } </h1>
 
-        <TimeMachine />
+        <TimeMachine currentDate={this.props.currentDate} />
 
         <Notepad title='Sent codewords' />
 
