@@ -3,24 +3,27 @@ import React from 'react'
 const NUM_LETTERS = 3
 const TOTAL_DELAY = 1300
 const MAX_DELAY = 100
+const MALFORMED_MSG = 'COULD NOT DECODE'
 
 class LogEntry extends React.Component {
   constructor (props) {
     super(props)
     this.onMouseOver = this.onMouseOver.bind(this)
     this.onMouseOut = this.onMouseOut.bind(this)
+
     this.state = {
       timer: null,
+      malformed: this.props.content === false,
       count: 0,
       letterIndex: 0,
       content: '',
-      fullContent: this.props.content
+      fullContent: this.props.content || MALFORMED_MSG
     }
   }
 
   componentDidMount () {
     if (this.props.skipAnimation) {
-      this.setState({content: this.props.content})
+      this.setState({content: this.state.fullContent})
     } else {
       this.animateText()
     }
@@ -69,9 +72,12 @@ class LogEntry extends React.Component {
   }
 
   render () {
+    let className = 'log-entry'
+    if (this.props.isActive) className += ' active'
+    if (this.state.malformed) className += ' malformed'
     return (
       <div
-        className={this.props.isActive ? 'log-entry active' : 'log-entry'}
+        className={className}
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}>
         {this.state.content}

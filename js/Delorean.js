@@ -85,7 +85,7 @@ class Delorean extends React.Component {
 
   handleSendResponse (codeword, response) {
     const data = response.data
-    const message = data.well_formed ? data.message : 'ERR: MALFORMED'
+    const message = data.well_formed ? data.message : false
     this.setState({
       codewords: [codeword].concat(this.state.codewords)
     })
