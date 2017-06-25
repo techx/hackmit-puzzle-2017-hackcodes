@@ -10,6 +10,10 @@ with open('script.txt', 'r') as f:
 def index():
   return '/u/&lt;ur_github&gt;'
 
+@app.route('/u/<username>')
+def page(username):
+  return render_template('index.html')
+
 def get_answer(username):
   return hack_hash(username + app.SECRET_KEY, ['0', '1'], app.delorean.max_bits)
 
