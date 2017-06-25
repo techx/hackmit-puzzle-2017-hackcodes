@@ -41,20 +41,28 @@ class Delorean extends React.Component {
     return month + ' ' + year
   }
 
+  reverseIndex (array) {
+    return array.map((value, i) => {
+      return {value: value, index: array.length - (i + 1)}
+    }) 
+  }
+
   getCodewords () {
-    return this.state.codewords.concat([
+    const codewords = this.state.codewords.concat([
       'codeword 3',
       'codeword 2',
       'codeword 1'
     ])
+    return this.reverseIndex(codewords)
   }
 
   getMessages () {
-    return this.state.messages.concat([
+    const messages = this.state.messages.concat([
       'message 3',
       'message 2',
       'message 1'
     ])
+    return this.reverseIndex(messages)
   }
 
   hover (isBeginHover, entryId) {
@@ -72,9 +80,6 @@ class Delorean extends React.Component {
       .post('/api/decode', data)
       .then((response) => {
         this.handleSendResponse(codeword, response)
-      })
-      .catch((error) => {
-        console.log(error)
       })
   }
 
