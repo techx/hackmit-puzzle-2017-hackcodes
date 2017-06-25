@@ -227,3 +227,7 @@ pre {
   padding: -0.25rem;
   line-height: 20px;
 }
+
+.malformed.log-entry {
+  color: #ff585d;
+}
