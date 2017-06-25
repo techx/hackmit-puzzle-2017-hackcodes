@@ -15,6 +15,7 @@ class Notepad extends React.Component {
             hover={this.props.hover}
             key={item.index}
             entryId={item.index}
+            bits={item.bits}
             content={item.value} />
         })}
       </div>

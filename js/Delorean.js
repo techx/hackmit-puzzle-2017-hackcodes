@@ -42,25 +42,26 @@ class Delorean extends React.Component {
   }
 
   reverseIndex (array) {
-    return array.map((value, i) => {
-      return {value: value, index: array.length - (i + 1)}
+    return array.map((item, i) => {
+      item.index = array.length - (i + 1)
+      return item
     })
   }
 
   getCodewords () {
     const codewords = this.state.codewords.concat([
-      'codeword 3',
-      'codeword 2',
-      'codeword 1'
+      {value: 'codeword 3', bits: false},
+      {value: 'codeword 2', bits: false},
+      {value: 'codeword 1', bits: false}
     ])
     return this.reverseIndex(codewords)
   }
 
   getMessages () {
     const messages = this.state.messages.concat([
-      'message 3',
-      'message 2',
-      'message 1'
+      {value: 'message 3', bits: '01010101111010'},
+      {value: 'message 2', bits: '10101001001010'},
+      {value: 'message 1', bits: '01010111100101'}
     ])
     return this.reverseIndex(messages)
   }
@@ -85,12 +86,17 @@ class Delorean extends React.Component {
 
   handleSendResponse (codeword, response) {
     const data = response.data
-    const message = data.well_formed ? data.message : false
     this.setState({
-      codewords: [codeword].concat(this.state.codewords)
+      codewords: [{
+        value: codeword,
+        bits: false
+      }].concat(this.state.codewords)
     })
     this.setState({
-      messages: [message].concat(this.state.messages)
+      messages: [{
+        value: data.well_formed ? data.message : false,
+        bits: data.message_bits
+      }].concat(this.state.messages)
     })
     this.store('deloreanCodesCodewords', this.state.codewords)
     this.store('deloreanCodesMessages', this.state.messages)

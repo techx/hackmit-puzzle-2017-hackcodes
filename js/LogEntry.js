@@ -78,6 +78,7 @@ class LogEntry extends React.Component {
     return (
       <div
         className={className}
+        title={this.props.bits || this.props.content}
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}>
         {this.state.content}
