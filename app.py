@@ -17,9 +17,36 @@ with open('script.txt', 'r') as f:
 
 ANSWER_TEMPLATE = 'the %s of %s but like %s'
 
-COMPANIES_1 = 'uber google yahoo twitter facebook'.split(' ')
-INDUSTRIES = 'argiculture music media'.split(' ')
-COMPANIES_2 = 'yelp stripe square microsoft apple adobe'.split(' ')
+COMPANIES_1 = [
+    'airware', 'amazon', 'apple', 'atlassian', 'blend', 'box',
+    'cisco', 'de shaw', 'docker', 'dropbox', 'ebay', 'evernote',
+    'fidelity', 'github', 'groupon',
+    'hubspot', 'ibm', 'intuit', 'kayak', 'lastpass', 'logitech',
+    'mailchimp', 'microsoft', 'mozilla', 'nvidia', 'oracle', 'pandora',
+    'pinterest', 'quizlet', 'redhat', 'slack', 'spacex',
+    'stripe', 'thumbtack', 'tumblr', 'twitch', 'uber', 'valve',
+    'whatsapp', 'yahoo', 'zappos', 'zillow'
+]
+INDUSTRIES = [
+    'agriculture', 'art', 'beauty', 'clean tech',
+    'buildings', 'consulting', 'consumers', 'marketing',
+    'ecommerce', 'education', 'energy', 'fashion',
+    'fin tech', 'health care', 'health', 'hotels',
+    'hr', 'iot', 'bio',
+    'logistics', 'groceries', 'media', 'nonprofits', 'real estate',
+    'restaurants', 'retail', 'sports', 'travel'
+]
+COMPANIES_2 = [
+    'airbnb', 'akamai', 'asana', 'barclays',
+    'bloomberg', 'braintree', 'cruise', 'aws',
+    'duolingo', 'etsy', 'facebook', 'fitbit',
+    'galois', 'godaddy', 'google', 'houzz', 'hulu', 'intel',
+    'jane st', 'linkedin', 'lyft', 'medium',
+    'mongodb', 'nest', 'openai', 'palantir', 'paypal', 'qualcomm',
+    'quora', 'sendgrid', 'snap', 'square', 'tesla',
+    'tinder', 'twilio', 'twitter', 'unity', 'disney', 'xero',
+    'yelp', 'zenefits', 'zynga'
+]
 
 # validate companies
 content_length = max(map(len, COMPANIES_1)) + \
