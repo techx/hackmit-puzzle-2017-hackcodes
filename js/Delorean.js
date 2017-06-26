@@ -32,11 +32,19 @@ class Delorean extends React.Component {
         params: {username: username}
       })
       .then((response) => {
-        const codewords = response.data.map((example) => {
-          return {value: example.codeword, bits: false}
+        const codewords = response.data.map((example, i) => {
+          return {
+            id: 'ex-codeword-' + i,
+            value: example.codeword,
+            bits: false
+          }
         })
-        const messages = response.data.map((example) => {
-          return {value: example.message, bits: example.message_bits}
+        const messages = response.data.map((example, i) => {
+          return {
+            id: 'ex-message--' + i,
+            value: example.message,
+            bits: example.message_bits
+          }
         })
         this.setState({
           examples: {codewords: codewords, messages: messages}
@@ -63,25 +71,16 @@ class Delorean extends React.Component {
     return month + ' ' + year
   }
 
-  reverseIndex (array) {
-    return array.map((item, i) => {
-      item.index = array.length - (i + 1)
-      return item
-    })
-  }
-
   getCodewords () {
-    const codewords = this.state.codewords.concat(
+    return this.state.codewords.concat(
       this.state.examples.codewords
     )
-    return this.reverseIndex(codewords)
   }
 
   getMessages () {
-    const messages = this.state.messages.concat(
+    return this.state.messages.concat(
       this.state.examples.messages
     )
-    return this.reverseIndex(messages)
   }
 
   hover (isBeginHover, entryId) {
@@ -104,14 +103,17 @@ class Delorean extends React.Component {
 
   handleSendResponse (codeword, response) {
     const data = response.data
+    const time = +new Date()
     this.setState({
       codewords: [{
+        id: 'codeword-' + time,
         value: codeword,
         bits: false
       }].concat(this.state.codewords)
     })
     this.setState({
       messages: [{
+        id: 'message-' + time,
         value: data.well_formed ? data.message : false,
         bits: data.message_bits
       }].concat(this.state.messages)
