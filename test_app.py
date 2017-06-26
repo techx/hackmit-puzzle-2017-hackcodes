@@ -59,6 +59,24 @@ class AppTest(unittest.TestCase):
         self.assertEqual(r['message'], answer_str)
         self.assertEqual(r['message_bits'], answer_bits)
 
+    def test_example(self):
+        rv = self.app.get('/api/examples')
+        examples = json.loads(rv.data)
+        for example in examples:
+            self.assertEqual(example['message_bits'],
+                             simple_encoding.encode(example['message']))
+            self.assertEqual(simple_encoding.decode(
+                example['message_bits']), example['message'])
+            self.assertCountEqual(
+                app.app.delorean.encode_without_permutation(
+                    example['message_bits']),
+                example['codeword'].split(' ')
+            )
+            self.assertEqual(
+                app.app.delorean.decode(example['codeword'].split(' ')),
+                example['message_bits']
+            )
+
 
 if __name__ == '__main__':
     unittest.main()
