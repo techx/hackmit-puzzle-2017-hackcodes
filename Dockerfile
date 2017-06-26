@@ -5,7 +5,7 @@ ARG APP_PATH=/hackcodes
 RUN apk add --update --no-cache python3 python3-dev build-base linux-headers
 RUN pip3 install --upgrade pip
 
-RUN pip3 install uwsgi
+RUN pip3 install uwsgi gevent
 #RUN CFLAGS="$CFLAGS -L/lib" pip3 install uwsgi
 
 WORKDIR $APP_PATH
@@ -22,4 +22,4 @@ COPY . $APP_PATH
 RUN webpack
 
 EXPOSE 8000
-CMD ["uwsgi", "--http", ":8000", "--wsgi-file", "app.py", "--callable", "app"]
+CMD ["uwsgi", "--gevent", "100", "--http", ":8000", "--wsgi-file", "app.py", "--callable", "app"]
