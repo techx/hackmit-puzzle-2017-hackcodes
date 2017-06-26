@@ -4,6 +4,7 @@ from delorean import DeLorean, NotWellFormedException
 from hack_hash import hack_hash
 import simple_encoding
 import os
+import sys
 
 app = Flask(__name__)
 sentry = Sentry(app)
@@ -26,6 +27,7 @@ with open('projects.txt', 'r') as f:
         sys.exit(1)
     print("loaded %i projects" % len(PROJECTS))
 
+
 @app.route('/')
 def index():
     return '/u/&lt;ur_github&gt;'
@@ -34,8 +36,9 @@ def index():
 @app.route('/u/<username>')
 def page(username):
     resp = Response(render_template('index.html'))
+    token_strategy = 'lower,newlines->spaces,drop-non-lettersspaces'
     resp.headers['X-Script'] = '/static/script.txt'
-    resp.headers['X-Tokenization-Strategy'] = 'lower,newlines->spaces,drop-non-lettersspaces'
+    resp.headers['X-Tokenization-Strategy'] = token_strategy
     return resp
 
 
