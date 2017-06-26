@@ -158,6 +158,9 @@ def decode():
 
     return jsonify(response)
 
+@app.route('/healthz')
+def status():
+    return 'OK'
 
 if __name__ == '__main__':
     app.SECRET_KEY = 'abcdsafkdsajf'
