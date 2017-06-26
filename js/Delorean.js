@@ -18,8 +18,30 @@ class Delorean extends React.Component {
     this.state = {
       codewords: codewords,
       messages: messages,
-      activeLogEntry: null
+      activeLogEntry: null,
+      examples: {codewords: [], messages: []}
     }
+
+    this.loadExamples()
+  }
+
+  loadExamples () {
+    const username = window.location.href.split('/').pop()
+    axios
+      .get('/api/examples', {
+        params: {username: username}
+      })
+      .then((response) => {
+        const codewords = response.data.map((example) => {
+          return {value: example.codeword, bits: false}
+        })
+        const messages = response.data.map((example) => {
+          return {value: example.message, bits: example.message_bits}
+        })
+        this.setState({
+          examples: {codewords: codewords, messages: messages}
+        })
+      })
   }
 
   store (key, value) {
@@ -49,20 +71,16 @@ class Delorean extends React.Component {
   }
 
   getCodewords () {
-    const codewords = this.state.codewords.concat([
-      {value: 'codeword 3', bits: false},
-      {value: 'codeword 2', bits: false},
-      {value: 'codeword 1', bits: false}
-    ])
+    const codewords = this.state.codewords.concat(
+      this.state.examples.codewords
+    )
     return this.reverseIndex(codewords)
   }
 
   getMessages () {
-    const messages = this.state.messages.concat([
-      {value: 'message 3', bits: '01010101111010'},
-      {value: 'message 2', bits: '10101001001010'},
-      {value: 'message 1', bits: '01010111100101'}
-    ])
+    const messages = this.state.messages.concat(
+      this.state.examples.messages
+    )
     return this.reverseIndex(messages)
   }
 
