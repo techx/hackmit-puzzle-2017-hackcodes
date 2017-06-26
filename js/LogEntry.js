@@ -3,7 +3,7 @@ import React from 'react'
 const NUM_LETTERS = 3
 const TOTAL_DELAY = 1300
 const MAX_DELAY = 100
-const MALFORMED_MSG = 'COULD NOT DECODE'
+const MALFORMED_MSG = 'ERROR READING'
 
 class LogEntry extends React.Component {
   constructor (props) {
