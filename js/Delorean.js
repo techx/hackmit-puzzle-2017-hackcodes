@@ -100,6 +100,10 @@ class Delorean extends React.Component {
     })
     this.store('deloreanCodesCodewords', this.state.codewords)
     this.store('deloreanCodesMessages', this.state.messages)
+
+    if (data.answer) {
+      alert('nice job :) puzzle answer: ' + data.answer)
+    }
   }
 
   clear () {
