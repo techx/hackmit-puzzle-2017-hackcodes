@@ -5,6 +5,13 @@ from hack_hash import hack_hash
 import simple_encoding
 import os
 import random
+import statsd
+
+statsd_client = statsd.StatsClient(os.environ.get('STATSD_HOST', ''), 8125)
+
+def incr_stat(name):
+    statsd_client.incr('puzzle.codes.%s' % name)
+
 
 app = Flask(__name__)
 sentry = Sentry(app)
@@ -89,6 +96,7 @@ def get_answer_str(username):
 
 @app.route('/api/examples')
 def examples():
+    incr_stat('examples')
     examples = []
     for example in EXAMPLE_STRS:
         example_bits = simple_encoding.encode(example)
@@ -109,6 +117,7 @@ def challenge():
         abort(400)
     username = request.args['username']
     answer_str = get_answer_str(username)
+    incr_stat('challenge')
 
     response = {
         'message': answer_str,
@@ -128,9 +137,12 @@ def decode():
     well_formed = False
     answer = None
 
+    incr_stat('decode')
+
     try:
         message_bits = app.delorean.decode(word_list)
         well_formed = True
+        incr_stat('well_formed_decode')
     except NotWellFormedException:
         pass
 
@@ -140,6 +152,7 @@ def decode():
     answer_bits = simple_encoding.encode(answer_str)
 
     if message_bits == answer_bits:
+        incr_stat('correct_decode')
         answer = 'YOU DID IT'
 
     message_str = None
