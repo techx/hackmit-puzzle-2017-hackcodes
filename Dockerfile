@@ -22,4 +22,4 @@ COPY . $APP_PATH
 RUN webpack
 
 EXPOSE 8000
-CMD ["uwsgi", "--gevent", "100", "--http", ":8000", "--wsgi-file", "app.py", "--callable", "app"]
+CMD ["uwsgi", "--gevent", "100", "--gevent-monkey-patch", "--http", ":8000", "--wsgi-file", "app.py", "--callable", "app"]
