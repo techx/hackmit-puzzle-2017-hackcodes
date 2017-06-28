@@ -16,6 +16,9 @@
   <script type="text/javascript">
   Raven.config('https://73e7f593ee0a4a93aed870ea7bc78d8b@sentry.io/183614').install()
   </script>
+  <script type="text/javascript">
+  var USERNAME = "{{username}}";
+  </script>
   <!-- Attach React components -->
   <script type="text/javascript" src="{{ url_for('static', filename='bundle.js') }}"></script>
 </body>

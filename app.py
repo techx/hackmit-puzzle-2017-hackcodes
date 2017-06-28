@@ -81,7 +81,7 @@ def index():
 
 @app.route('/u/<username>/')
 def page(username):
-    resp = Response(render_template('index.html'))
+    resp = Response(render_template('index.html', username=username))
     token_strategy = 'lower,newlines->spaces,drop-non-lettersspaces'
     resp.headers['X-Script'] = '/static/script.txt'
     resp.headers['X-Tokenization-Strategy'] = token_strategy
@@ -112,7 +112,7 @@ def examples():
     return jsonify(examples)
 
 
-@app.route('/api/challenge/')
+@app.route('/api/challenge')
 def challenge():
     if 'username' not in request.args:
         abort(400)
@@ -127,7 +127,7 @@ def challenge():
     return jsonify(response)
 
 
-@app.route('/api/decode/', methods=['POST'])
+@app.route('/api/decode', methods=['POST'])
 def decode():
     if 'codeword' not in request.form or 'username' not in request.form:
         abort(400)
@@ -172,7 +172,7 @@ def decode():
 
     return jsonify(response)
 
-@app.route('/healthz/')
+@app.route('/healthz')
 def status():
     return 'OK'
 

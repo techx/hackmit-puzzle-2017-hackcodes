@@ -26,10 +26,9 @@ class Delorean extends React.Component {
   }
 
   loadExamples () {
-    const username = window.location.href.split('/').pop()
     axios
-      .get('/api/examples/', {
-        params: {username: username}
+      .get('/api/examples', {
+        params: {username: USERNAME}
       })
       .then((response) => {
         const codewords = response.data.map((example, i) => {
@@ -90,12 +89,11 @@ class Delorean extends React.Component {
   }
 
   send (codeword) {
-    const username = window.location.href.split('/').pop()
     const data = new FormData()
-    data.append('username', username)
+    data.append('username', USERNAME)
     data.append('codeword', codeword)
     axios
-      .post('/api/decode/', data)
+      .post('/api/decode', data)
       .then((response) => {
         this.handleSendResponse(codeword, response)
       })

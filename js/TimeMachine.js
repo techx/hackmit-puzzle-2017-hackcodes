@@ -12,10 +12,9 @@ class TimeMachine extends React.Component {
   }
 
   loadChallenge () {
-    const username = window.location.href.split('/').pop()
     axios
-      .get('/api/challenge/', {
-        params: {username: username}
+      .get('/api/challenge', {
+        params: {username: USERNAME}
       })
       .then((response) => {
         this.setState({challenge: response.data.message})
