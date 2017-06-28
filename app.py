@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, abort, jsonify, Response
 from raven.contrib.flask import Sentry
 from delorean import DeLorean, NotWellFormedException
 from hack_hash import hack_hash
+from date_hash import date_hash
 import simple_encoding
 import os
 import random
@@ -78,7 +79,7 @@ def index():
     return '/u/&lt;ur_github&gt;'
 
 
-@app.route('/u/<username>')
+@app.route('/u/<username>/')
 def page(username):
     resp = Response(render_template('index.html'))
     token_strategy = 'lower,newlines->spaces,drop-non-lettersspaces'
@@ -111,7 +112,7 @@ def examples():
     return jsonify(examples)
 
 
-@app.route('/api/challenge')
+@app.route('/api/challenge/')
 def challenge():
     if 'username' not in request.args:
         abort(400)
@@ -126,7 +127,7 @@ def challenge():
     return jsonify(response)
 
 
-@app.route('/api/decode', methods=['POST'])
+@app.route('/api/decode/', methods=['POST'])
 def decode():
     if 'codeword' not in request.form or 'username' not in request.form:
         abort(400)
@@ -153,7 +154,7 @@ def decode():
 
     if message_bits == answer_bits:
         incr_stat('correct_decode')
-        answer = 'YOU DID IT'
+        answer = date_hash(app.secret_key, username)
 
     message_str = None
     try:
@@ -171,7 +172,7 @@ def decode():
 
     return jsonify(response)
 
-@app.route('/healthz')
+@app.route('/healthz/')
 def status():
     return 'OK'
 

@@ -28,7 +28,7 @@ class Delorean extends React.Component {
   loadExamples () {
     const username = window.location.href.split('/').pop()
     axios
-      .get('/api/examples', {
+      .get('/api/examples/', {
         params: {username: username}
       })
       .then((response) => {
@@ -95,7 +95,7 @@ class Delorean extends React.Component {
     data.append('username', username)
     data.append('codeword', codeword)
     axios
-      .post('/api/decode', data)
+      .post('/api/decode/', data)
       .then((response) => {
         this.handleSendResponse(codeword, response)
       })
