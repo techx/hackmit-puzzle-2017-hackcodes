@@ -18,7 +18,7 @@ app = Flask(__name__)
 sentry = Sentry(app)
 
 if 'SECRET_KEY' in os.environ:
-    app.SECRET_KEY = os.environ['SECRET_KEY']
+    app.secret_key = os.environ['SECRET_KEY']
 
 with open('script.txt', 'r') as f:
     app.delorean = DeLorean(f.read())
