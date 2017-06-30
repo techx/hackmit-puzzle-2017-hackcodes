@@ -10,6 +10,7 @@ class Delorean extends React.Component {
     this.hover = this.hover.bind(this)
     this.send = this.send.bind(this)
     this.clear = this.clear.bind(this)
+    this.closeDialog = this.closeDialog.bind(this)
 
     const codewords = this.retrieve('deloreanCodesCodewords') || []
     const messages = this.retrieve('deloreanCodesMessages') || []
@@ -99,6 +100,11 @@ class Delorean extends React.Component {
       })
   }
 
+  alertUser(message) {
+    this.setState({ showDialog: true, message });
+		window.scrollTo(0, 0);
+  }
+
   handleSendResponse (codeword, response) {
     const data = response.data
     const time = +new Date()
@@ -120,7 +126,7 @@ class Delorean extends React.Component {
     this.store('deloreanCodesMessages', this.state.messages)
 
     if (data.answer) {
-      alert('nice job :) puzzle answer: ' + data.answer)
+      this.alertUser('nice job :) puzzle answer: ' + data.answer)
     }
   }
 
@@ -131,9 +137,24 @@ class Delorean extends React.Component {
     this.store('deloreanCodesMessages', [])
   }
 
+  closeDialog () {
+    this.setState({ showDialog: false });
+  }
+
   render () {
     return (
       <div className='container'>
+        <div
+          className='dialog'
+          style={{
+            display: this.state.showDialog ? 'block' : 'none'
+          }}>
+          { this.state.message }
+          <br/>
+          <br/>
+          <a onClick={this.closeDialog}>close</a>
+        </div>
+
         <FuturePane
           currentDate={this.getCurrentDate()}
           notepadContent={this.getCodewords()}

@@ -231,3 +231,27 @@ pre {
 .malformed.log-entry {
   color: #ff585d;
 }
+
+.dialog {
+  position: absolute;
+  background: #252c37;
+  border-radius: 3px;
+  color: white;
+  font-size: 24px;
+  top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Karla', sans-serif;
+  padding: 2rem;
+  width: 300px;
+  margin-left: -150px;
+  left: 50%;
+  z-index: 3;
+  border: 1px solid #515b6b;
+}
+
+.dialog a {
+  cursor: pointer;
+  font-weight: bold;
+  color: #ff585d;
+}
