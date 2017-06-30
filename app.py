@@ -89,9 +89,9 @@ def page(username):
 
 
 def get_answer_str(username):
-    company_1 = hack_hash(username + app.SECRET_KEY, COMPANIES_1, 1)
-    industry = hack_hash(username + app.SECRET_KEY, INDUSTRIES, 1)
-    company_2 = hack_hash(username + app.SECRET_KEY, COMPANIES_2, 1)
+    company_1 = hack_hash(username + app.secret_key, COMPANIES_1, 1)
+    industry = hack_hash(username + app.secret_key, INDUSTRIES, 1)
+    company_2 = hack_hash(username + app.secret_key, COMPANIES_2, 1)
     return ANSWER_TEMPLATE % (company_1, industry, company_2)
 
 
