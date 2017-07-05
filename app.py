@@ -8,10 +8,14 @@ import os
 import random
 import statsd
 
-statsd_client = statsd.StatsClient(os.environ.get('STATSD_HOST', ''), 8125)
+statsd_client = None
+statsd_host = os.environ.get('STATSD_HOST', None)
+if statsd_host:
+    statsd_client = statsd.StatsClient(statsd_host, 8125)
 
 def incr_stat(name):
-    statsd_client.incr('puzzle.codes.%s' % name)
+    if statsd_client:
+        statsd_client.incr('puzzle.codes.%s' % name)
 
 
 app = Flask(__name__)
@@ -19,6 +23,8 @@ sentry = Sentry(app)
 
 if 'SECRET_KEY' in os.environ:
     app.secret_key = os.environ['SECRET_KEY']
+else:
+    app.secret_key = 'test_secret_key'
 
 with open('script.txt', 'r') as f:
     app.delorean = DeLorean(f.read())
